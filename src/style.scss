@@ -1,0 +1,6 @@
+// Testing sass modules
+@use 'styles/module';
+
+body {
+    border: 5px solid blue;
+}
