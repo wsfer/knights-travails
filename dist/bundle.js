@@ -116,7 +116,17 @@ eval("\n\n/* istanbul ignore next  */\nfunction styleTagTransform(css, styleElem
   \**********************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n\n\nconst print = () => {\n    console.log('Testing');\n};\n\nprint();\n\n\n//# sourceURL=webpack://knights-travails/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./style.scss */ \"./src/style.scss\");\n/* harmony import */ var _modules_adjacency_list__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/adjacency-list */ \"./src/modules/adjacency-list.js\");\n\n\n\n\nconsole.log(_modules_adjacency_list__WEBPACK_IMPORTED_MODULE_1__[\"default\"].findAdjacentNodes([3, 4]));\n\n\n//# sourceURL=webpack://knights-travails/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/modules/adjacency-list.js":
+/*!***************************************!*\
+  !*** ./src/modules/adjacency-list.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/**\n * There's a pattern on knight moves which makes easy to get adjacent nodes without\n * hard coding all possible combinations:\n *\n * Moves 2 squares on one axis (x or y);\n * There's one adjacent node by moving 1 square to the opposite axis, if (0 <= x <= 7) AND (0 <= y <= 7);\n * There's another adjacent node by moving -1 square on the opposite axis, if (0 <= x <= 7) AND (0 <= y <= 7);\n * Repeat these steps for all 4 directions.\n * The requirement (0 <= x <= 7) AND (0 <= y <= 7) means the node is INSIDE the board/graph.\n */\nclass List {\n    static findAdjacentNodes([x, y]) {\n        const nodes = [];\n        // Move two square on axis x, while y is constant\n        if (x + 2 <= 7) {\n            if (y + 1 <= 7) nodes.push([x + 2, y + 1]);\n            if (y - 1 >= 0) nodes.push([x + 2, y - 1]);\n        }\n        if (x - 2 >= 0) {\n            if (y + 1 <= 7) nodes.push([x - 2, y + 1]);\n            if (y - 1 >= 0) nodes.push([x - 2, y - 1]);\n        }\n\n        // Move two square on axis y, while x is constant\n        if (y + 2 <= 7) {\n            if (x + 1 <= 7) nodes.push([x + 1, y + 2]);\n            if (x - 1 >= 0) nodes.push([x - 1, y + 2]);\n        }\n        if (y - 2 >= 0) {\n            if (x + 1 <= 7) nodes.push([x + 1, y - 2]);\n            if (x - 1 >= 0) nodes.push([x - 1, y - 2]);\n        }\n\n        return nodes;\n    }\n}\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (List);\n\n\n//# sourceURL=webpack://knights-travails/./src/modules/adjacency-list.js?");
 
 /***/ })
 
