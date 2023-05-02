@@ -1,4 +1,4 @@
-import List from './adjacency-list';
+import getNeighbors from './neighbors';
 import Node from './node';
 
 class Graph {
@@ -21,7 +21,7 @@ class Graph {
         this.nodes[x][y] = node;
 
         // Then set it's neighbors, if any neighbors doesn't exist in the graph, create it
-        const neighbors = List.getNeighbors([x, y]);
+        const neighbors = getNeighbors([x, y]);
         neighbors.forEach(([coordX, coordY]) => {
             node.neighbors.push(
                 this.nodes[coordX][coordY]
@@ -29,6 +29,8 @@ class Graph {
                     : this.buildNode([coordX, coordY])
             );
         });
+
+        return node;
     }
 }
 
