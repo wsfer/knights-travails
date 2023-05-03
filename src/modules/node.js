@@ -1,8 +1,8 @@
 class Node {
-    constructor(position) {
-        this.position = position;
-        this.knight = false;
+    constructor() {
         this.neighbors = [];
+        this.knight = false;
+        this.predecessor = null;
     }
 }
 
