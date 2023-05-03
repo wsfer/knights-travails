@@ -18,6 +18,9 @@ class Graph {
         // Build the node and put it in the graph
         const node = new Node();
         this.nodes[x][y] = node;
+        node.square.addEventListener('click', () => {
+            this.knightMoves(node);
+        });
 
         // Then set it's neighbors, if neighbor doesn't exist in the graph, create it
         const neighbors = getNeighbors([x, y]);
@@ -32,8 +35,8 @@ class Graph {
         return node;
     }
 
-    knightMoves([x, y]) {
-        const path = this.findPath(this.nodes[x][y]);
+    knightMoves(targetNode) {
+        const path = this.findPath(targetNode);
 
         // Clear all paths for future function calls
         this.nodes.forEach((row) => {
@@ -49,6 +52,7 @@ class Graph {
             current = path.pop();
             current.knight = true;
         }
+        this.knightNode = current;
     }
 
     /**
