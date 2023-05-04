@@ -1,0 +1,27 @@
+@use "./colors" as *;
+
+header {
+    background-color: $bg-color;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+
+    h1 {
+        color: $light;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    svg {
+        width: 3rem;
+        height: 3rem;
+
+        > path {
+            fill: $light;
+        }
+    }
+}

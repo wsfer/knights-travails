@@ -18,7 +18,7 @@ class Graph {
         // Build the node and put it in the graph
         const node = new Node();
         this.nodes[x][y] = node;
-        node.square.addEventListener('click', () => {
+        node.square.addEventListener('click', (e) => {
             this.knightMoves(node);
         });
 

@@ -1,0 +1,31 @@
+@use "./colors" as *;
+
+footer {
+    background-color: $bg-color;
+    width: 100%;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
+    > h3 {
+        color: $light;
+    }
+
+    > .links {
+        display: flex;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+
+    svg {
+        width: 2rem;
+        height: 2rem;
+
+        > path {
+            fill: $light;
+        }
+    }
+}

@@ -14,12 +14,12 @@ class Node {
         // Case where knight is moved here
         if (bool) {
             this.#hasKnight = true;
-            this.square.classList.add('knight');
+            this.square.setAttribute('id', 'knight');
         }
         // Case where knight is removed from here
         else {
             this.#hasKnight = false;
-            this.square.classList.remove('knight');
+            this.square.removeAttribute('id');
         }
     }
 

@@ -1,7 +1,27 @@
+@use "./colors" as *;
+
 .board {
     display: grid;
     grid-template-columns: repeat(8, 50px);
     grid-template-rows: repeat(8, 50px);
+
+    div:nth-child(even) {
+        .square:nth-child(even) {
+            background-color: $light;
+        }
+        .square:nth-child(odd) {
+            background-color: $dark;
+        }
+    }
+
+    div:nth-child(odd) {
+        .square:nth-child(even) {
+            background-color: $dark;
+        }
+        .square:nth-child(odd) {
+            background-color: $light;
+        }
+    } 
 }
 
 .square {
@@ -9,7 +29,11 @@
     height: 50px;
     border: 1px solid black;
 
-    &.knight {
-        background-color: purple;
+    &#knight {
+        background-color: $bg-color;
+    }
+
+    &#target {
+        background-color: $secondary;
     }
 }
