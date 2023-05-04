@@ -4,7 +4,7 @@ class Node {
     constructor() {
         this.neighbors = [];
         this.#hasKnight = false;
-        this.predecessor = null;
+        this.visitedBy = null; // For Breadth First Search
         this.square = new Range()
             .createContextualFragment(`<div class="square"></div>`)
             .querySelector('.square');
