@@ -36,6 +36,9 @@
 
 .square {
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     &#knight {
         background-color: $bg-color;
@@ -43,5 +46,11 @@
 
     &#target {
         background-color: $secondary;
+    }
+
+    > .knight-icon {
+        > path {
+            fill: $light;
+        }
     }
 }
