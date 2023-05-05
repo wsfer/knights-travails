@@ -1,8 +1,10 @@
 import getNeighbors from './neighbors';
 import Node from './node';
+import DOMManager from './dom-manager';
 
 class Graph {
     constructor() {
+        this.interface = new DOMManager();
         // An 8x8 matrix
         this.nodes = Array(8)
             .fill()
@@ -15,8 +17,9 @@ class Graph {
 
     // Recursively build the graph, starting from a node and going to it's neighbors when needed
     buildNode([x, y]) {
-        // Build the node and put it in the graph
-        const node = new Node();
+        const node = new Node(
+            `${['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][x]}${y}`
+        );
         this.nodes[x][y] = node;
         node.square.addEventListener('click', (e) => {
             this.knightMoves(node);
@@ -40,32 +43,45 @@ class Graph {
      * then move the knight through nodes in this path
      */
     knightMoves(targetNode) {
-        // Find the path
+        if (targetNode === this.knightNode) return;
         const queue = [];
 
         /**
          * Setting the visitedBy to anything other than null from starting node
-         * to tell the next function that this node is already visited to avoid problems
+         * to tell the next function that this node is already visited to avoid problems.
+         * This value is also the first value on path array and is removed with .slice(1) below
          */
         this.knightNode.visitedBy = -1;
 
         queue.push(this.knightNode);
-        const path = this.findPath(targetNode, queue.shift(), queue);
+        const path = this.findPath(targetNode, queue.shift(), queue).slice(1);
 
-        path.pop(); // remove the knightNode temporary predecessor from path
+        this.knightNode.visitedBy = null; // To avoid bugs on future function calls
 
-        // Reset starting node predecessor for future function calls
-        this.knightNode.visitedBy = null;
+        this.interface.startKnightMove(
+            this.knightNode,
+            targetNode,
+            path.length - 1
+        );
 
-        // Travel with the knight through the nodes
-        let current = path.pop();
-        // TODO: a delay while travelling
-        while (path.length !== 0) {
-            current.knight = false;
-            current = path.pop();
-            current.knight = true;
+        this.knightNode = path[path.length - 1]; // Points to node which the knight will end
+
+        // Travel with the knight through the nodes, with a small delay
+        for (let i = 0; i < path.length - 1; i += 1) {
+            setTimeout(() => {
+                path[i].knight = false;
+                path[i + 1].knight = true;
+                this.interface.insertPath(path[i], path[i + 1]);
+            }, i * 1500 + 1000);
         }
-        this.knightNode = current; // Points to node which the knight is now
+
+        setTimeout(() => {
+            // This will allow user to select a new square
+            this.interface.board.removeChild(
+                this.interface.board.querySelector('.invisible')
+            );
+            this.interface.steps.textContent = 'Done!';
+        }, path.length * 1500);
     }
 
     /**
@@ -75,28 +91,27 @@ class Graph {
     findPath(targetNode, currentNode, queue) {
         // Base case: return the target node and it's predecessor
         if (currentNode === targetNode) {
-            return [currentNode, currentNode.visitedBy];
+            return [currentNode.visitedBy, currentNode];
         }
 
         const unvisitedNeighbors = currentNode.neighbors.filter(
             (node) => node.visitedBy === null
         );
 
-        // Visited and push the nodes to the queue
         unvisitedNeighbors.forEach((node) => {
             node.visitedBy = currentNode;
             queue.push(node);
         });
 
-        // Then repeat to the next node on queue
+        // Recursive step: repeat for the next node
         const path = this.findPath(targetNode, queue.shift(), queue);
 
         // If current node is on path, put it's predecessor on the path
-        if (currentNode === path[path.length - 1]) {
-            path.push(currentNode.visitedBy);
+        if (currentNode === path[0]) {
+            path.unshift(currentNode.visitedBy);
         }
 
-        // "unvisit" all visited nodes for future function calls
+        // Unvisit all visited nodes for future function calls
         unvisitedNeighbors.forEach((node) => {
             node.visitedBy = null;
         });

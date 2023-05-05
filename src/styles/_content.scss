@@ -15,12 +15,16 @@ main {
     align-items: center;
     gap: 1rem;
 
-    .from {
+    * {
+        text-align: center;
+    }
+
+    .from, .path span:first-child {
         font-weight: bold;
         color: $bg-color;
     }
 
-    .to {
+    .to, .path span:first-child + span {
         font-weight: bold;
         color: $secondary;
     }
