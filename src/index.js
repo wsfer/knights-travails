@@ -10,3 +10,13 @@ board.nodes.forEach((row) => {
     });
     document.querySelector('.board').appendChild(div);
 });
+
+document.querySelector('.toggle-informations').addEventListener('click', () => {
+    document.querySelector('.informations').classList.toggle('hidden');
+});
+
+document
+    .querySelector('.informations > button')
+    .addEventListener('click', () => {
+        document.querySelector('.informations').classList.add('hidden');
+    });

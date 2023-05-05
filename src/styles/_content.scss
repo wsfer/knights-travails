@@ -1,5 +1,6 @@
 @use "./colors" as *;
 @use "./board";
+@use "./informations";
 
 main {
     background-color: $light;
@@ -8,6 +9,7 @@ main {
     flex-wrap: wrap;
     gap: 2rem;
     padding: 2rem 4rem;
+    position: relative;
 }
 
 .board-status {
