@@ -1,5 +1,41 @@
 @use "./colors" as *;
 
+.board-container {
+    display: grid;
+    grid-template-areas: 
+        "y board"
+        ".   x  ";
+
+    > .board {
+        grid-area: board;
+    }
+
+    > .y-axis {
+        grid-area: y;
+        display: grid;
+        height: 50vw;
+        padding-right: 1rem;
+    }
+
+    > .x-axis {
+        grid-area: x;
+        display: grid;
+        grid-auto-flow: column;
+        width: 50vw;
+        padding-top: 1rem;
+    }
+
+    .x-axis > div,
+    .y-axis > div {
+        font-weight: bold;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.25rem;
+    }
+}
+
 .board {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
@@ -7,6 +43,7 @@
     position: relative;
     height: 50vw;
     width: 50vw;
+    box-shadow: 0.2rem 0.2rem 0.5rem $dark;
 
     > div:nth-child(even) {
         .square:nth-child(even) {
