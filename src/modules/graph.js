@@ -72,7 +72,7 @@ class Graph {
                 path[i].knight = false;
                 path[i + 1].knight = true;
                 this.interface.insertPath(path[i], path[i + 1]);
-            }, i * 1500 + 1000);
+            }, i * 1000 + 500);
         }
 
         setTimeout(() => {
@@ -81,7 +81,7 @@ class Graph {
                 this.interface.board.querySelector('.invisible')
             );
             this.interface.steps.textContent = 'Done!';
-        }, path.length * 1500);
+        }, path.length * 1000);
     }
 
     /**
