@@ -18,7 +18,7 @@ class Graph {
     // Recursively build the graph, starting from a node and going to it's neighbors when needed
     buildNode([x, y]) {
         const node = new Node(
-            `${['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][x]}${y}`
+            `${['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'][x]}${y + 1}`
         );
         this.nodes[x][y] = node;
         node.square.addEventListener('click', (e) => {
