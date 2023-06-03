@@ -14,7 +14,7 @@
         grid-area: y;
         display: grid;
         height: 50vw;
-        padding-right: 1rem;
+        padding-right: 0.3rem;
     }
 
     > .x-axis {
@@ -22,7 +22,6 @@
         display: grid;
         grid-auto-flow: column;
         width: 50vw;
-        padding-top: 1rem;
     }
 
     .x-axis > div,
